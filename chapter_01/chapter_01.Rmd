@@ -1,0 +1,330 @@
+---
+title: 'Chapter 1: Combinatorial Analysis'
+output:
+  html_document:
+    theme: "sandstone"
+    toc: true
+    toc_float: true
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+-----
+
+## 1.1 Introduction
+
+-----
+
+## **1.2 The Basic Principle of Counting**
+
+-----
+
+#### _Example 2a_
+A small community consists of 10 women, each of whom has 3 children. If one woman and her children are to be chosen as mother and child of the year, how many difference choices are posible?
+
+##### **Answer:**
+By regarding the choice of the woman as the outcome of the first experiment and the subsequent choice of one of her children as the outcome of the second experiment, we see from the basic principle that there are:
+
+``` {r}
+10 * 3
+```
+...possible choices.
+
+-----
+
+#### _Example 2b_
+A college planning committee consists of 3 freshmen, 4 sophomores, 5 juniors and 2 seniors. A subcommittee of 4, consisting of 1 person from each class, is to be chosen. How many different subcommittees are possible?
+
+##### **Answer:**
+We may regard the choice of a subcommittee as the combined outcome of the four separate experiments of choosing a single representative from each of the classes. Hence, if follows from the generalized version of the basic principle that there are:
+
+``` {r}
+# Freshmen x Sophomores x Juniors x Seniors
+3 * 4 * 5 * 2
+```
+
+...possible combinations.
+
+-----
+
+#### _Example 2c_
+How many different 7-place license plates are possible if the first three places are to be occupied by letters and the final 4 by numbers?
+
+##### **Answer:**
+As there are 26 letters in the alphabet, and 10 possibilities for numbers [0-9], the answer would be:
+
+``` {r}
+26 * 26 * 26 * 10 * 10 * 10 * 10
+```
+
+-----
+
+#### _Example 2d_
+How many functions defined on $n$ points are possible if each functional value is either 0 or 1?
+
+##### **Answer:**
+Let the points be 1, 2, ..., $n$. Since $f(i)$ must be either 0 or 1 for each $i$ = 1, 2, ..., $n$, it follows that there are $2^{n}$ possible functions.
+
+-----
+
+#### _Example 2e_
+In Example 2c, how many license plates would be possible if repetition among letters or numbers were prohibited?
+
+##### **Answer:**
+In this case, there would be:
+
+```{r}
+26 * 25 * 24 * 10 * 9 * 8 * 7
+```
+...possible license plate combinations.
+
+-----
+
+## **1.3 Permutations**
+
+-----
+
+#### _Example 3a_
+How many different batting orders are possible for a baseball team consisting of nine players?
+
+##### **Answer:**
+This would be the factorial of 9:
+
+```{r}
+factorial(9)
+```
+...possible batting orders.
+
+-----
+
+#### _Example 3b_
+A class in probability theory consists of 6 men and 4 women. An examination is given, and the students are ranked according to their performance. Assume that no two students obtain the same score.
+
+A) How many different rankings are possible?
+B) If the men are ranked just among themselves, and the women among themselves, how many different rankings are possible?
+
+##### **Answer:**
+A) As each ranking corresponds to a particular ordered arrangement of the ten people, we see that the answer to this would be the factorial of 10:
+
+```{r}
+factorial(10)
+```
+...possible rankings.
+
+B) As there are 6! possible rankings of the men among themselves and 4! possible rankings of the women among themselves, it follows from the basic principle that there are:
+
+``` {r}
+factorial(6) * factorial(4)
+```
+
+...possible rankings in this case.
+
+-----
+
+#### _Example 3c_
+Mr. Jones has 10 books that he is going to put on his bookshelf. Of these, 4 are mathematics books, 3 are chemistry books, 2 are history books, and 1 is a language book. Jones wants to arrange his books so that all the books dealing with the same subject are together on the shelf. How many different arrangements are possible?
+
+##### **Answer:**
+There are 4!3!2!1! arrangements such that the mathematics books are first in line, then the chemistry books, then the history books, and then the language book. Similarly, for each possible ordering of the subjects, there are 4!3!2!1! possible arrangements. Hence, as there are 4! possible orderings of the subjects, the desired answer is:
+
+```{r}
+factorial(4)*factorial(4)*factorial(3)*factorial(2)*factorial(1)
+```
+...possible arrangements.
+
+-----
+
+#### _Example 3d_
+How many different letter arrangements can be formed using the letters $P \; E \; P \; P \; E \; R$?
+
+##### **Answer:**
+We first note that there are 6! permutations of the letters $P_{1} \; E_{1} \; P_{2} \; P_{3} \; E_{2} \; R_{}$ when the 3 $P$'s and the two $E$'s are distinguished from each other. However, consider any one of these permutations - for instance, $P_{1} \; P_{2} \; E_{1} \; P_{3} \; E_{2} \; R$. If we now permute the $P$'s among themselves and the $E$'s among themselves, then the resultant vector arrangement would still be of the form $P \; P \; E \; P \; E \; R$. That is, all 3!2! permutations would be of the form $P \; P \; E \; P \; E \; R$. Hence, there are:
+
+```{r}
+factorial(6) / (factorial(3)*factorial(2))
+```
+...possible letter arrangements of the letters $P \; E \; P \; P \; E \; R$.
+
+-----
+
+#### _Example 3e_
+A chess tournament has 10 competitors of which 4 are Russian, 3 are from the United States, 2 are from Great Britain, and 1 are from Brazil. If the tournament result lists just the nationalities of the players in the order of which they placed, how many outcomes are possible?
+
+##### **Answer:**
+There are:
+
+```{r}
+factorial(10) / (factorial(4)*factorial(3)*factorial(2)*factorial(1))
+```
+...possible outcomes.
+
+-----
+
+#### _Example 3f_
+How many different signals, each consisting of nine flags hung in a line, can be made from a set of 4 white flags, 3 red flags, and 2 blue flags if all flags of the same color are identical?
+
+##### **Answer:**
+There are:
+
+```{r}
+factorial(9) / (factorial(4)*factorial(3)*factorial(2))
+```
+...different signals.
+
+-----
+
+## **1.4 Combinations**
+
+-----
+
+#### _Example 4a_
+A committee of three is to be formed from a group of twenty people. How many different committees are possible?
+
+##### **Answer:**
+There are:
+
+``` {r}
+choose(20, 3)
+```
+...possible outcomes.
+
+-----
+
+#### _Example 4b_
+From a group of 5 women and 7 men, how many different committees consisting of 2 women and 3 men can be formed? What is 2 of the men are feuding and refuse to serve on the committee together?
+
+##### **Answer:**
+There are:
+
+``` {r}
+# Possible committees consisting of 2 women and 3 men.
+choose(5, 2) * choose(7, 3)
+
+# Possible committees when dudes are feuding.
+((choose(2,0)*choose(5,3)) + (choose(2,1)*choose(5,2)))*choose(5,2)
+```
+
+-----
+
+#### _Example 4c_
+Consider a set of $n$ antennas of which $m$ are defective and $n-m$ are functional and assume that all of the defectives and all of the functionals are considered indistinguishable. How many linear orderings are there in which no two defectives are consecutive?
+
+##### **Answer:**
+Imagine that the $n-m$ functional antennas are lined up among themselves. Now, if no two defectives are to be consecutive, then the spaces between the functional antennas must each contain at most one defective antenna. That is, in the $n-m+1$ possible positions between the $n-m$ functional antennas, we must select $m$ of these in which to put the defective antennas. 
+
+Hence, there are:
+
+$$ \begin{pmatrix} n-m+1 \\ m \end{pmatrix} $$
+possible orderings in which there is at least one functional antenna between any two defective ones.
+
+-----
+
+#### _Example 4d_
+Expand $(x+y)^{3}$.
+
+##### **Answer:**
+
+$$ (x+y)^{3} = 
+    \begin{pmatrix} 3 \\ 0 \end{pmatrix}x^{0}y^{3} + 
+    \begin{pmatrix} 3 \\ 1 \end{pmatrix}x^{1}y^{2} +
+    \begin{pmatrix} 3 \\ 2 \end{pmatrix}x^{2}y +
+    \begin{pmatrix} 3 \\ 3 \end{pmatrix}x^{3}y^{0} \\
+     = y^{3} + 3xy^{2} + 3x^{2}y + x^{3} $$
+-----
+
+#### _Example 4e_
+How many subsets are there of a set consisting of $n$ elements?
+
+##### **Answer:**
+Since there are $\begin{pmatrix} n \\ k \end{pmatrix}$ subsets of size $k$, the desired answer is:
+
+$$ \sum_{k=0}^{a} \begin{pmatrix} n \\ k \end{pmatrix} = 
+    (1 + 1)^{n} = 2^{n} $$
+
+-----
+
+## **1.5 Multinomial Coefficients**
+
+-----
+
+#### _Example 5a_
+A police department in a small city consists of 10 officers. if the department policy is to have 5 of the officers patrolling the streets, 2 of the officers working full-time at the station, and 3 of the officers on reserve at the station, how many different divisions of the 10 officers into the 3 groups are possible?
+
+##### **Answer:**
+There are:
+
+``` {r}
+factorial(10) / (factorial(5)*factorial(2)*factorial(3))
+```
+...possible divisions.
+
+-----
+
+#### _Example 5b_
+Ten children are to be divided into an $A$ team and a $B$ team of 5 each. The $A$ team will play in one league and the $B$ team in another. How many different divisions are possible?
+
+##### **Answer:**
+There are:
+
+``` {r}
+factorial(10) / (factorial(5)*factorial(5))
+```
+...possible divisions.
+
+-----
+
+#### _Example 5c_
+In order to play a game of basketball, 10 children at a playground divide themselves into two teams of 5 each. How many different divisions are possible?
+
+##### **Answer:**
+Note that this example is different from Example 5b because now the order of the two teams is irrelevant. That is, there is no $A$ and $B$ team, just a division consisting of 2 groups of 5 each. Hence, the desired answer is:
+
+```{r}
+factorial(10) / (factorial(5)*factorial(5))
+```
+
+-----
+
+## **1.6 On the Distribution of Balls in Urns**
+
+-----
+
+#### _Example 6a_
+How many distinct nonnegative integer-valued solutions of $x_{1} + x_{2} = 3$ are possible?
+
+##### **Answer:**
+There are $\begin{pmatrix} 3+2-1 \\ 2-1 \end{pmatrix} = 4$ such solutions: (0,3), (1,2), (2,1), (3,0).
+
+-----
+
+#### _Example 6b_
+An investor has \$20,000 to invest among 4 possible investments. Each investment must be in units of a thousand dollars. If the total \$20,000 is to be invested, how many different investment strategies are possible? What is not all the money need be invested?
+
+##### **Answer:**
+If we let $x_{i}, i$ = 1, 2, 3, 4, denote the number of thousands invested in investment $i$, then, when all is to be invested, $x_{i}, x_{2}, x_{3}, x_{4}$ are integers satisfying
+
+$$ x_{1} + x_{2} + x_{3} + x_{4} = 20 \;\;\;\;\;\; x_{i} \geq 0 $$
+Hence, by Proposition 6.2, there are
+
+```{r}
+choose(23, 3)
+```
+possible investment strategies. If not all of the money need be invested, then if we let $x_{5}$ denote the amount kept in reserve, a strategy is a nonnegative integer-valued vector $(x_{1}, x_{2}, x_{3}, x_{4}, x_{5})$ satisfying
+
+$$ x_{1} + x_{2} + x_{3} + x_{4} + x_{5} = 20 $$
+Hence, by Proposition 6.2, there are now
+```{r}
+choose(24, 4)
+```
+possible strategies.
+
+-----
+
+#### _Example 6c_
+How many terms are there in the multinomial expansion of $(x_{1} + x_{2} + ... x_{r})^{n}$?
+
+##### **Answer:**
+
