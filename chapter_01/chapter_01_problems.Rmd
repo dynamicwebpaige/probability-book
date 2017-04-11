@@ -1,0 +1,355 @@
+---
+title: 'Chapter 1: Problems'
+output:
+  html_document:
+    theme: "sandstone"
+    toc: true
+    toc_float: true
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+-----
+
+## Problems
+
+-----
+
+#### 1.
+A) How many different 7-place license plates are possible if the first 2 places are for letters and the other 5 for numbers?
+B) Repeat part (a) under the assumption that no letter or number can be repeated in a single license plate.
+
+##### **Solution, Part A:**
+```{r}
+26 * 26 * 10 * 10 * 10 * 10 * 10
+```
+
+##### **Solution, Part B:**
+```{r}
+26 * 25 * 10 * 9 * 8 * 7 * 6
+```
+
+-----
+
+#### 2. 
+How many outcome sequences are possible when a die is rolled four times, where we say, for instance, that the outcome is 3, 4, 3, 1 if the first roll landed on 3, the second on 4, the third on 3, and the fourth on 1?
+
+##### **Solution:**
+```{r}
+# Six sides to each die, and four outcomes of interest
+6**4
+```
+
+#### 3.
+Twenty workers are to be assigned to 20 different jobs, one to each job. How many different assignments are possible?
+
+##### **Solution:**
+```{r}
+factorial(20)
+```
+
+-----
+
+#### 4.
+John, Jim, Jay, and Jack have formed a band consisting of 4 instruments. If each of the boys can play all 4 instruments, how many different arrangements are possible? What if John and Jim can play all 4 instruments, but Jay and Jack can play only piano and drum?
+
+##### **Solution:**
+There are 
+```{r}
+factorial(4)
+```
+possible arrangements. By assigning instruments to Jay, Jack, John, and Jim, in that order, we see by the generalized basic principle that there are:
+```{r}
+2 * 1 * 2 * 1
+```
+possibilities.
+
+-----
+
+#### 5.
+For years, telephone area codes in the United States and Canada consisted of a sequence of three digits. The first digit was an integer between 2 and 9; the second digit was either 0 or 1; the third digit was any integer betewen 1 and 9. How many area codes were possible? How many area codes starting with a 4 were possible?
+
+##### **Solution:**
+```{r}
+# Possible codes:
+8 * 2 * 9
+
+# Possible codes that start with a 4:
+1 * 2 * 9
+```
+
+-----
+
+#### 6.
+A well-known nursery rhyme starts as follows:
+
+> As I was going to St. Ives,  
+> I met a man with 7 wives.  
+> Each wife had 7 sacks.  
+> Each sack had 7 cats.  
+> Each cat had 7 kittens.  
+
+How many kittens did the traveler meet?
+
+##### **Solution:**
+```{r}
+# 7 wives * 7 sacks each * 7 cats in each sack * 7 kittens per cat
+7 * 7 * 7 * 7
+```
+
+-----
+
+#### 7.
+A) In how many ways can 3 boys and 3 girls sit in a row?
+B) In how many ways can 3 boys and 3 girls sit in a row if the boys and the girls are each to sit together?
+C) In how many ways if only the boys must sit together?
+D) In how many ways if no two people of the same sex are allowed to sit together?
+
+##### **Solution:**
+```{r}
+# A: 3 boys + 3 girls = 6! combinations
+factorial(6)
+
+# B: 2 genders * 3! for boys * 3! for girls
+2 * factorial(3) * factorial(3)
+
+# C: 4! for combinations of boys, 3! for girls
+factorial(4) * factorial(3)
+
+# D: If no two people of the same sex are allowed to sit next to one another,
+6 * 3 * 2 * 2 * 1 * 1
+```
+-----
+
+#### 8.
+How many different letter arrangements can be made from the letters:
+A) FLUKE
+B) PROPOSE
+C) MISSISSIPPI
+D) ARRANGE
+
+##### **Solution:**
+```{r}
+# A: 5 letters, no repeats
+factorial(5)
+
+# B: 7 letters, 2 are repeats
+factorial(7) / (factorial(2) * factorial(2))
+
+# C: 11 letters, 2 repeat 4 times each, and 1 repeats twice
+factorial(11) / (factorial(4) * factorial(4) * factorial(2))
+
+# D: 7 letters, 2 repeat twice
+factorial(7) / (factorial(2) * factorial(2))
+```
+
+-----
+
+#### 9.
+A child has 12 blocks, of which 6 are black, 4 are red, 1 is white, and 1 is blue. If the child puts the blocks in a line, how many arrangements are possible?
+
+```{r}
+# 12 blocks; 4 colors of varying quantities
+factorial(12) / (factorial(6) * factorial(4) * factorial(1) * factorial(1))
+```
+
+-----
+
+#### 10.
+In how many ways can 8 people be seated in a row if:
+
+A) there are no restrictions on the seating arrangement;
+B) persons $A$ and $B$ must sit next to each other;
+C) there are 4 men and 4 women and so 2 men or 2 women can sit next to each other;
+D) there are 5 men and they must sit next to each other;
+E) there are 4 married couples and each couple must sit together?
+
+```{r}
+# No restrictions on seating arrangements:
+factorial(8)
+
+# Persons A and B must sit next to each other:
+2 * factorial(7)
+
+# Boys' Club
+factorial(5) * factorial(4)
+
+# Married people 
+factorial(4) * 2**4
+```
+
+-----
+
+#### 11.
+In how many ways can 3 novels, 2 mathematical books, and 1 chemistry book be arranged on a bookshelf if
+
+A) the books can be arranged in any order;
+B) the mathematics books must be together and the novels must be together;
+C) the novels must be together but the other books can be arranged in any order?
+
+```{r}
+# Six books in total (3 + 2 + 1)
+factorial(6)
+
+# By subject
+factorial(3) * factorial(2) * factorial(3)
+
+# Non-fiction vs. Fiction
+factorial(3) * factorial(4)
+```
+
+-----
+
+#### 12.
+Five separate awards (best scholarship, best leadership qualities, and so on) are to be presented to selected students from a class of 30. How many different outcomes are possible if
+
+A) a student can receive any number of awards;
+B) each student can receive at most 1 award?
+
+```{r}
+# A: a student can receive any number of awards
+30**5
+
+# B: each student can receive (at most) 1 award
+30 * 29 * 28 * 27 * 26
+```
+
+-----
+
+#### 13. 
+Consider a group of 20 people. If everyone shakes hands with everyone else, how many handshakes take place?
+
+```{r}
+choose(20, 2)
+```
+
+-----
+
+#### 14.
+How many 5-card poker hands are there?
+
+```{r}
+choose(52, 5)
+```
+
+-----
+
+#### 15.
+A dance class consists of 22 students, 10 women, and 12 men. If 5 men and 5 women are to be chosen and then paired off, how many results are possible?
+
+```{r}
+# 10 men and 12 women, 5 chosen from each group. 
+# They can be paired off in 5 different ways.
+factorial(5) * choose(10, 5) * choose(12, 5)
+```
+
+-----
+
+#### 16. 
+A student has to sell 2 books from a collection of 6 math, 7 science, and 4 economics books. How many choices are possible if
+
+A) both books are to be on the same subject;
+B) the books are to be on different subjects?
+
+```{r}
+# A: Both chosen books have to be from the same subject
+choose(6, 2) + choose(7, 2) + choose(4, 2)
+
+# B: Books must be from different subjects
+6*7 + 6*4 + 7*4
+```
+
+-----
+
+#### 17.
+A total of 7 different gifts are to be distributed among 10 children. How many distinct results are possible if no child is to receive more than one gift?
+
+```{r}
+10 * 9 * 8 * 7 * 6 * 5 * 4
+```
+
+-----
+
+#### 18.
+A committee of 7, consisting of 2 Republicans, 2 Democrats, and 3 Independents, is to be chosen from a group of 5 Republicans, 6 Democrats, and 4 Independents. How many committees are possible?
+
+```{r}
+choose(5,2) * choose(6,2) * choose(4,3)
+```
+
+-----
+
+#### 19.
+From a group of 8 women and 6 men a committee consisting of 3 men and 3 women is to be formed. How many different committees are possible if:
+
+A) 2 of the men refuse to serve together;
+B) 2 of the women refuse to serve together;
+C) 1 man and 1 woman refuse to serve together?
+
+```{r}
+```
+
+#### 20.
+A person has 8 friends, of whom 5 will be invited to a party.
+A) How many choices are there if 2 of the friends are feuding and will not attend together?
+B) How many choices if 2 of the friends will only attend together?
+
+#### 21.
+Consider the grid of points shown below. Suppose that starting at the point labeled $A$ you must go one step up or one step to the right at each move. This is continued until the point labeled $B$ is reached. How many different paths from $A$ to $B$ are possible?
+               
+_< insert picture >_
+
+#### 22. 
+In Problem 21, how many different paths are there from $A$ to $B$ that go through the point circled below?
+
+_< insert picture >_
+
+#### 23.
+A psychology laboratory conducting dream research contains 3 rooms, with 2 beds in each room. If 3 sets of identical twins are to be assigned to these 6 beds so that each set of twins sleeps in different beds in the same room, how many assignments are possible?
+
+#### 24.
+Expand $(3x^{2} + y)^{5}$.
+
+#### 25.
+The game of bridge is played by 4 players, each of whom is dealt 13 cards. How many bridge cards are possible?
+
+#### 26. 
+Expand $(x_{1} + 2x_{2} + 3x_{3})^{4}$.
+
+#### 27. 
+If 12 people are to be divided into 3 committees of respective sizes 3, 4, and 5, how many divisions are possible?
+
+#### 28.
+If 8 new teachers are to be divided among 4 schools, how many divisions are possible? What if each school must receive 2 teachers?
+
+#### 29.
+Ten weight lifters are competing in a team weight-lifting contest. Of the lifters, 3 are from the United States, 4 are from Russia, 2 are from China, and 1 is from Canada. If the scoring takes account of the countries that the lifters represent but not their individual identities, how many different oucomes are possible from the point of view of scores? How many different outcomes correspond to results in which the United States has 1 competitor in the top three and 2 in the bottom three.
+
+#### 30.
+Delegates from 10 countries, including Russia, France, England, and the United States, are to be seated in a row. How many different seating arrangements are possible if the French and English delegates are seated next to each other, and the Russian and U.S. delegates are not to be next to each other?
+
+#### 31.
+If 8 identical blackboards are to be divided among 4 schools, how many divisions are possible? How many, if each school must receive at least 1 blackboard?
+
+#### 32. 
+An elevator starts at the basement with 8 people (not including the elevator operator) and discharges them all by the time it reaches the top floor, number 6. In how many ways could the operator have perceived the people leaving the elevator if all people look alike to him? What if the 8 people consisted of 5 men and 3 women and the operator could tell a man from a woman?
+
+#### 33.
+We have \$20,000 that must be invested among 4 possible opportunities. Each investment must be invested in units of \$1,000, and there are minimal investments that need to be made if one is to invest in those opportunities. The investments are 2, 2, 3, and 4 thousand dollars. How many different investment strategies are available if:
+A) an investment must be made in each opportunity;
+B) investments must be made in at least 3 of the 4 opportunities?
+
+-----
+
+## Theoretical Exercises
+
+-----
+
+-----
+
+## Self-Test Problems and Exercises
+
+-----
