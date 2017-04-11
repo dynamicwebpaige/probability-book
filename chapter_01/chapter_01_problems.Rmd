@@ -290,6 +290,14 @@ B) 2 of the women refuse to serve together;
 C) 1 man and 1 woman refuse to serve together?
 
 ```{r}
+# A: committees not containing the 2 men + committees containing exactly one of them
+(choose(8,3) * choose(4,3)) + (choose(8,3)*choose(2,1)*choose(4,2))
+
+# B: women refusing to serve together on a comittee
+(choose(6,3)*choose(6,3)) + (choose(2,1)*choose(6,2)*choose(6,3))
+
+# C: ruh-roh. That sounds dramatic.
+(choose(7,3)*choose(5,3)) + (choose(7,2)*choose(5,3)) + (choose(7,3)*choose(5,2))
 ```
 
 #### 20.

@@ -479,6 +479,15 @@ choose(6, 2) + choose(7, 2) + choose(4, 2)</code></pre>
 <li>2 of the women refuse to serve together;</li>
 <li>1 man and 1 woman refuse to serve together?</li>
 </ol>
+<pre class="r"><code># A: committees not containing the 2 men + committees containing exactly one of them
+(choose(8,3) * choose(4,3)) + (choose(8,3)*choose(2,1)*choose(4,2))</code></pre>
+<pre><code>## [1] 896</code></pre>
+<pre class="r"><code># B: women refusing to serve together on a comittee
+(choose(6,3)*choose(6,3)) + (choose(2,1)*choose(6,2)*choose(6,3))</code></pre>
+<pre><code>## [1] 1000</code></pre>
+<pre class="r"><code># C: ruh-roh. That sounds dramatic.
+(choose(7,3)*choose(5,3)) + (choose(7,2)*choose(5,3)) + (choose(7,3)*choose(5,2))</code></pre>
+<pre><code>## [1] 910</code></pre>
 </div>
 <div id="section-19" class="section level4">
 <h4>20.</h4>
