@@ -6,5 +6,5 @@
 > 
 > **The most important questions of life are, for the most part, really only problems of probability.**"
 
-> > - Pierre Simon, _Marquis de Laplace_
-> > > _"the Newton of France"
+> > > > > > Pierre Simon, _Marquis de Laplace_
+> > > > > > "the Newton of France"
