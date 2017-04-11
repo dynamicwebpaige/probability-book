@@ -488,64 +488,135 @@ choose(6, 2) + choose(7, 2) + choose(4, 2)</code></pre>
 <pre class="r"><code># C: ruh-roh. That sounds dramatic.
 (choose(7,3)*choose(5,3)) + (choose(7,2)*choose(5,3)) + (choose(7,3)*choose(5,2))</code></pre>
 <pre><code>## [1] 910</code></pre>
+<hr />
 </div>
 <div id="section-19" class="section level4">
 <h4>20.</h4>
-<p>A person has 8 friends, of whom 5 will be invited to a party. A) How many choices are there if 2 of the friends are feuding and will not attend together? B) How many choices if 2 of the friends will only attend together?</p>
+<p>A person has 8 friends, of whom 5 will be invited to a party.</p>
+<ol style="list-style-type: upper-alpha">
+<li>How many choices are there if 2 of the friends are feuding and will not attend together?</li>
+<li>How many choices if 2 of the friends will only attend together?</li>
+</ol>
+<pre class="r"><code># A: Friends are feuding
+choose(6,5) + (choose(2,1)*choose(6,4))</code></pre>
+<pre><code>## [1] 36</code></pre>
+<pre class="r"><code># B: BFFs
+choose(6,5) + choose(6,3)</code></pre>
+<pre><code>## [1] 26</code></pre>
+<hr />
 </div>
 <div id="section-20" class="section level4">
 <h4>21.</h4>
 <p>Consider the grid of points shown below. Suppose that starting at the point labeled <span class="math inline">\(A\)</span> you must go one step up or one step to the right at each move. This is continued until the point labeled <span class="math inline">\(B\)</span> is reached. How many different paths from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> are possible?</p>
 <p><em>&lt; insert picture &gt;</em></p>
+<pre class="r"><code># Steps to reach the goal / steps to the right and left
+factorial(7) / (factorial(3) * factorial(4))</code></pre>
+<pre><code>## [1] 35</code></pre>
+<hr />
 </div>
 <div id="section-21" class="section level4">
 <h4>22.</h4>
 <p>In Problem 21, how many different paths are there from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> that go through the point circled below?</p>
 <p><em>&lt; insert picture &gt;</em></p>
+<pre class="r"><code># Paths from A to the circled point:
+  (factorial(4) / (factorial(2)*factorial(2)) + 
+# Paths from B to the circled point:
+  factorial(3) / (factorial(2)*factorial(1))) * 2</code></pre>
+<pre><code>## [1] 18</code></pre>
+<hr />
 </div>
 <div id="section-22" class="section level4">
 <h4>23.</h4>
 <p>A psychology laboratory conducting dream research contains 3 rooms, with 2 beds in each room. If 3 sets of identical twins are to be assigned to these 6 beds so that each set of twins sleeps in different beds in the same room, how many assignments are possible?</p>
+<pre class="r"><code>factorial(3) * 2**3</code></pre>
+<pre><code>## [1] 48</code></pre>
+<hr />
 </div>
 <div id="section-23" class="section level4">
 <h4>24.</h4>
 <p>Expand <span class="math inline">\((3x^{2} + y)^{5}\)</span>.</p>
+<hr />
 </div>
 <div id="section-24" class="section level4">
 <h4>25.</h4>
 <p>The game of bridge is played by 4 players, each of whom is dealt 13 cards. How many bridge cards are possible?</p>
+<pre class="r"><code>factorial(52) / (factorial(13)*factorial(13)*factorial(13)*factorial(13))</code></pre>
+<pre><code>## [1] 5.364474e+28</code></pre>
+<hr />
 </div>
 <div id="section-25" class="section level4">
 <h4>26.</h4>
 <p>Expand <span class="math inline">\((x_{1} + 2x_{2} + 3x_{3})^{4}\)</span>.</p>
+<hr />
 </div>
 <div id="section-26" class="section level4">
 <h4>27.</h4>
 <p>If 12 people are to be divided into 3 committees of respective sizes 3, 4, and 5, how many divisions are possible?</p>
+<pre class="r"><code>factorial(12) / (factorial(3) * factorial(4) * factorial(5))</code></pre>
+<pre><code>## [1] 27720</code></pre>
+<hr />
 </div>
 <div id="section-27" class="section level4">
 <h4>28.</h4>
 <p>If 8 new teachers are to be divided among 4 schools, how many divisions are possible? What if each school must receive 2 teachers?</p>
+<pre class="r"><code># A: Dividing 8 teachers into 4 schools
+4**8</code></pre>
+<pre><code>## [1] 65536</code></pre>
+<pre class="r"><code># B: Pairing up teachers at each school
+factorial(8) / 2**4</code></pre>
+<pre><code>## [1] 2520</code></pre>
+<hr />
 </div>
 <div id="section-28" class="section level4">
 <h4>29.</h4>
 <p>Ten weight lifters are competing in a team weight-lifting contest. Of the lifters, 3 are from the United States, 4 are from Russia, 2 are from China, and 1 is from Canada. If the scoring takes account of the countries that the lifters represent but not their individual identities, how many different oucomes are possible from the point of view of scores? How many different outcomes correspond to results in which the United States has 1 competitor in the top three and 2 in the bottom three.</p>
+<pre class="r"><code># Anonymous competitors, only country information
+factorial(10) / (factorial(3)*factorial(4)*factorial(2))</code></pre>
+<pre><code>## [1] 12600</code></pre>
+<pre class="r"><code># United States: 1 competitor in top three, 2 in bottom three
+3 * choose(3,2) * (factorial(7)/(factorial(4)*factorial(2)))</code></pre>
+<pre><code>## [1] 945</code></pre>
+<hr />
 </div>
 <div id="section-29" class="section level4">
 <h4>30.</h4>
 <p>Delegates from 10 countries, including Russia, France, England, and the United States, are to be seated in a row. How many different seating arrangements are possible if the French and English delegates are seated next to each other, and the Russian and U.S. delegates are not to be next to each other?</p>
+<pre class="r"><code># (French and English next to each other) - (US and Russia)
+(2 * factorial(9)) - (2**2 * factorial(8))</code></pre>
+<pre><code>## [1] 564480</code></pre>
+<hr />
 </div>
 <div id="section-30" class="section level4">
 <h4>31.</h4>
 <p>If 8 identical blackboards are to be divided among 4 schools, how many divisions are possible? How many, if each school must receive at least 1 blackboard?</p>
+<pre class="r"><code>choose(11, 3)</code></pre>
+<pre><code>## [1] 165</code></pre>
+<hr />
 </div>
 <div id="section-31" class="section level4">
 <h4>32.</h4>
 <p>An elevator starts at the basement with 8 people (not including the elevator operator) and discharges them all by the time it reaches the top floor, number 6. In how many ways could the operator have perceived the people leaving the elevator if all people look alike to him? What if the 8 people consisted of 5 men and 3 women and the operator could tell a man from a woman?</p>
+<pre class="r"><code># If all people look the same:
+choose(13, 5)</code></pre>
+<pre><code>## [1] 1287</code></pre>
+<pre class="r"><code># If the operator could differentiate by gender:
+choose(10,5) * choose(8,5)</code></pre>
+<pre><code>## [1] 14112</code></pre>
+<hr />
 </div>
 <div id="section-32" class="section level4">
 <h4>33.</h4>
-<p>We have $20,000 that must be invested among 4 possible opportunities. Each investment must be invested in units of $1,000, and there are minimal investments that need to be made if one is to invest in those opportunities. The investments are 2, 2, 3, and 4 thousand dollars. How many different investment strategies are available if: A) an investment must be made in each opportunity; B) investments must be made in at least 3 of the 4 opportunities?</p>
+<p>We have $20,000 that must be invested among 4 possible opportunities. Each investment must be invested in units of $1,000, and there are minimal investments that need to be made if one is to invest in those opportunities. The investments are 2, 2, 3, and 4 thousand dollars. How many different investment strategies are available if:</p>
+<ol style="list-style-type: upper-alpha">
+<li>an investment must be made in each opportunity;</li>
+<li>investments must be made in at least 3 of the 4 opportunities?</li>
+</ol>
+<pre class="r"><code># A: investments must be made in each opportunity
+choose(12,3)</code></pre>
+<pre><code>## [1] 220</code></pre>
+<pre class="r"><code># B: Investments must be made in at least 3 of the 4
+choose(15,2) + choose(14,2) + 2*choose(13,2) + choose(12,3)</code></pre>
+<pre><code>## [1] 572</code></pre>
 <hr />
 </div>
 </div>
@@ -557,6 +628,89 @@ choose(6, 2) + choose(7, 2) + choose(4, 2)</code></pre>
 <div id="self-test-problems-and-exercises" class="section level2">
 <h2>Self-Test Problems and Exercises</h2>
 <hr />
+<div id="section-33" class="section level4">
+<h4>1.</h4>
+<p>How many different linear arrangements are there of the letters A, B, C, D, E, F for which:</p>
+<ol style="list-style-type: upper-alpha">
+<li>A and B are next to each other;</li>
+<li>A is before B;</li>
+<li>A is before B and B is before C;</li>
+<li>A is before B and C is before D;</li>
+<li>A and B are next to each other and C and D are also next to each other;</li>
+<li>E is not last in line?</li>
+</ol>
+<hr />
+</div>
+<div id="section-34" class="section level4">
+<h4>2.</h4>
+<p>If 4 Americans, 3 Frenchmen, and 3 Englishmen are to be seated in a row, how many seating arrangements are possible when people of the same naionality must sit next to each other?</p>
+<hr />
+</div>
+<div id="section-35" class="section level4">
+<h4>3.</h4>
+<p>A president, treasurer, and secretary, all different are to be chosen from a club consisting of 10 people. How many different choices of officers are possible if:</p>
+<ol style="list-style-type: upper-alpha">
+<li>There are no restrictions;</li>
+<li>A and B will not serve together;</li>
+<li>C and D will serve together or not at all;</li>
+<li>E must be an officer;</li>
+<li>F will serve only if he is president?</li>
+</ol>
+<hr />
+</div>
+<div id="section-36" class="section level4">
+<h4>4.</h4>
+<p>A student is to answer 7 out of 10 questions in an examination. How many choices has she? How many if she must answer at least 3 of the first 5 questions?</p>
+<hr />
+</div>
+<div id="section-37" class="section level4">
+<h4>5.</h4>
+<p>In how many ways can a man divide 7 gifts among his 3 children if the eldest is to receive 3 gifts and the others 2 each?</p>
+<hr />
+</div>
+<div id="section-38" class="section level4">
+<h4>6.</h4>
+<p>How many different 7-place license plates are possible when 3 of the entries are letters and 4 are digits? Assume that repetition of letters and numbers is allowed and that there is no restriction on where the letters or numbers can be placed.</p>
+<hr />
+</div>
+<div id="section-39" class="section level4">
+<h4>7.</h4>
+<p>Give a combinatorial explanation of the identity:</p>
+<p><span class="math display">\[ \begin{pmatrix} n \\ r \end{pmatrix} = \begin{pmatrix} n \\ n-r \end{pmatrix}\]</span></p>
+<hr />
+</div>
+<div id="section-40" class="section level4">
+<h4>8.</h4>
+<p>Consider <span class="math inline">\(n\)</span>-digit numbers where each digit is one of the 10 integers 0, 1, …, 9. How many such numbers are there for which:</p>
+<ol style="list-style-type: upper-alpha">
+<li>no two consecutive digits are equal;</li>
+<li>0 appears as a digit a total of <span class="math inline">\(i\)</span> times, i = 0, … <span class="math inline">\(n\)</span>?</li>
+</ol>
+<hr />
+</div>
+<div id="section-41" class="section level4">
+<h4>9.</h4>
+<p>Consider three clsases, each consisting of <span class="math inline">\(n\)</span> students. From this group of <span class="math inline">\(3n\)</span> students, a group of 3 students is to be chosen.</p>
+<ol style="list-style-type: upper-alpha">
+<li>How many choices are possible?</li>
+<li>How many choices are there in which all 3 students are in the same class?</li>
+<li>How may choices are there in which 2 of the 3 students are in the same class and the other student is in a different class?</li>
+<li>How many choices are there in which all 3 students are in different classes?</li>
+<li>Using the results of parts (a) through (d), write a combinatorial identity.</li>
+</ol>
+<hr />
+</div>
+<div id="section-42" class="section level4">
+<h4>10.</h4>
+<p>An art collection on auction consisted of 4 Dalis, 5 van Goghs, and 6 Picassos. At the auction were 5 art collectors. If a reporter noted only the number of Dalis, van Goghs, and Picassos acquired by each collector, how many different results could have been recorded if all works were sold?</p>
+<hr />
+</div>
+<div id="section-43" class="section level4">
+<h4>11.</h4>
+<p>Determine the number of vectors (<span class="math inline">\(x_{i}..., x_{n}\)</span>) such that each <span class="math inline">\(x_{i}\)</span> is a positive integer and</p>
+<p><span class="math display">\[ \sum_{i=1}^{n} x_i  \leq k \]</span></p>
+<p>where <span class="math inline">\(k \geq n\)</span>.</p>
+</div>
 </div>
 
 

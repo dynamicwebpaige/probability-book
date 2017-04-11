@@ -300,55 +300,154 @@ C) 1 man and 1 woman refuse to serve together?
 (choose(7,3)*choose(5,3)) + (choose(7,2)*choose(5,3)) + (choose(7,3)*choose(5,2))
 ```
 
+-----
+
 #### 20.
 A person has 8 friends, of whom 5 will be invited to a party.
+
 A) How many choices are there if 2 of the friends are feuding and will not attend together?
 B) How many choices if 2 of the friends will only attend together?
+
+```{r}
+# A: Friends are feuding
+choose(6,5) + (choose(2,1)*choose(6,4))
+
+# B: BFFs
+choose(6,5) + choose(6,3)
+```
+
+-----
 
 #### 21.
 Consider the grid of points shown below. Suppose that starting at the point labeled $A$ you must go one step up or one step to the right at each move. This is continued until the point labeled $B$ is reached. How many different paths from $A$ to $B$ are possible?
                
 _< insert picture >_
 
+```{r}
+# Steps to reach the goal / steps to the right and left
+factorial(7) / (factorial(3) * factorial(4))
+```
+
+-----
+
 #### 22. 
 In Problem 21, how many different paths are there from $A$ to $B$ that go through the point circled below?
 
 _< insert picture >_
 
+```{r}
+# Paths from A to the circled point:
+  (factorial(4) / (factorial(2)*factorial(2)) + 
+# Paths from B to the circled point:
+  factorial(3) / (factorial(2)*factorial(1))) * 2
+```
+
+-----
+
 #### 23.
 A psychology laboratory conducting dream research contains 3 rooms, with 2 beds in each room. If 3 sets of identical twins are to be assigned to these 6 beds so that each set of twins sleeps in different beds in the same room, how many assignments are possible?
+
+```{r}
+factorial(3) * 2**3
+```
+
+-----
 
 #### 24.
 Expand $(3x^{2} + y)^{5}$.
 
+-----
+
 #### 25.
 The game of bridge is played by 4 players, each of whom is dealt 13 cards. How many bridge cards are possible?
+
+```{r}
+factorial(52) / (factorial(13)*factorial(13)*factorial(13)*factorial(13))
+```
+
+-----
 
 #### 26. 
 Expand $(x_{1} + 2x_{2} + 3x_{3})^{4}$.
 
+-----
+
 #### 27. 
 If 12 people are to be divided into 3 committees of respective sizes 3, 4, and 5, how many divisions are possible?
+
+```{r}
+factorial(12) / (factorial(3) * factorial(4) * factorial(5))
+```
+
+-----
 
 #### 28.
 If 8 new teachers are to be divided among 4 schools, how many divisions are possible? What if each school must receive 2 teachers?
 
+```{r}
+# A: Dividing 8 teachers into 4 schools
+4**8
+# B: Pairing up teachers at each school
+factorial(8) / 2**4
+```
+
+-----
+
 #### 29.
 Ten weight lifters are competing in a team weight-lifting contest. Of the lifters, 3 are from the United States, 4 are from Russia, 2 are from China, and 1 is from Canada. If the scoring takes account of the countries that the lifters represent but not their individual identities, how many different oucomes are possible from the point of view of scores? How many different outcomes correspond to results in which the United States has 1 competitor in the top three and 2 in the bottom three.
+
+```{r}
+# Anonymous competitors, only country information
+factorial(10) / (factorial(3)*factorial(4)*factorial(2))
+# United States: 1 competitor in top three, 2 in bottom three
+3 * choose(3,2) * (factorial(7)/(factorial(4)*factorial(2)))
+```
+
+-----
 
 #### 30.
 Delegates from 10 countries, including Russia, France, England, and the United States, are to be seated in a row. How many different seating arrangements are possible if the French and English delegates are seated next to each other, and the Russian and U.S. delegates are not to be next to each other?
 
+```{r}
+# (French and English next to each other) - (US and Russia)
+(2 * factorial(9)) - (2**2 * factorial(8))
+```
+
+-----
+
 #### 31.
 If 8 identical blackboards are to be divided among 4 schools, how many divisions are possible? How many, if each school must receive at least 1 blackboard?
+
+```{r}
+choose(11, 3)
+```
+
+-----
 
 #### 32. 
 An elevator starts at the basement with 8 people (not including the elevator operator) and discharges them all by the time it reaches the top floor, number 6. In how many ways could the operator have perceived the people leaving the elevator if all people look alike to him? What if the 8 people consisted of 5 men and 3 women and the operator could tell a man from a woman?
 
+```{r}
+# If all people look the same:
+choose(13, 5)
+# If the operator could differentiate by gender:
+choose(10,5) * choose(8,5)
+```
+
+-----
+
 #### 33.
 We have \$20,000 that must be invested among 4 possible opportunities. Each investment must be invested in units of \$1,000, and there are minimal investments that need to be made if one is to invest in those opportunities. The investments are 2, 2, 3, and 4 thousand dollars. How many different investment strategies are available if:
+
 A) an investment must be made in each opportunity;
 B) investments must be made in at least 3 of the 4 opportunities?
+
+```{r}
+# A: investments must be made in each opportunity
+choose(12,3)
+# B: Investments must be made in at least 3 of the 4
+choose(15,2) + choose(14,2) + 2*choose(13,2) + choose(12,3)
+```
 
 -----
 
@@ -361,3 +460,84 @@ B) investments must be made in at least 3 of the 4 opportunities?
 ## Self-Test Problems and Exercises
 
 -----
+
+#### 1.
+How many different linear arrangements are there of the letters A, B, C, D, E, F for which:
+
+A) A and B are next to each other;
+B) A is before B;
+C) A is before B and B is before C;
+D) A is before B and C is before D;
+E) A and B are next to each other and C and D are also next to each other;
+F) E is not last in line?
+
+-----
+
+#### 2.
+If 4 Americans, 3 Frenchmen, and 3 Englishmen are to be seated in a row, how many seating arrangements are possible when people of the same naionality must sit next to each other?
+
+-----
+
+#### 3.
+A president, treasurer, and secretary, all different are to be chosen from a club consisting of 10 people. How many different choices of officers are possible if:
+
+A) There are no restrictions;
+B) A and B will not serve together;
+C) C and D will serve together or not at all;
+D) E must be an officer;
+E) F will serve only if he is president?
+
+-----
+
+#### 4.
+A student is to answer 7 out of 10 questions in an examination. How many choices has she? How many if she must answer at least 3 of the first 5 questions?
+
+-----
+
+#### 5.
+In how many ways can a man divide 7 gifts among his 3 children if the eldest is to receive 3 gifts and the others 2 each?
+
+-----
+
+#### 6.
+How many different 7-place license plates are possible when 3 of the entries are letters and 4 are digits? Assume that repetition of letters and numbers is allowed and that there is no restriction on where the letters or numbers can be placed.
+
+-----
+
+#### 7.
+Give a combinatorial explanation of the identity:
+
+$$ \begin{pmatrix} n \\ r \end{pmatrix} = \begin{pmatrix} n \\ n-r \end{pmatrix}$$
+
+-----
+
+#### 8.
+Consider $n$-digit numbers where each digit is one of the 10 integers 0, 1, ..., 9. How many such numbers are there for which:
+
+A) no two consecutive digits are equal;
+B) 0 appears as a digit a total of $i$ times, i = 0, ... $n$?
+
+-----
+
+#### 9.
+Consider three clsases, each consisting of $n$ students. From this group of $3n$ students, a group of 3 students is to be chosen.
+
+A) How many choices are possible?
+B) How many choices are there in which all 3 students are in the same class?
+C) How may choices are there in which 2 of the 3 students are in the same class and the other student is in a different class?
+D) How many choices are there in which all 3 students are in different classes?
+E) Using the results of parts (a) through (d), write a combinatorial identity.
+
+-----
+
+#### 10.
+An art collection on auction consisted of 4 Dalis, 5 van Goghs, and 6 Picassos. At the auction were 5 art collectors. If a reporter noted only the number of Dalis, van Goghs, and Picassos acquired by each collector, how many different results could have been recorded if all works were sold?
+
+-----
+
+#### 11.
+Determine the number of vectors ($x_{i}..., x_{n}$) such that each $x_{i}$ is a positive integer and 
+
+$$ \sum_{i=1}^{n} x_i  \leq k $$
+
+where $k \geq n$.
